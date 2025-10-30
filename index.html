@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CAVIAR Outfits - Ropa urbana, streetwear y estilo sin marca.">
+    <meta name="theme-color" content="#000000">
+    <title>Caviar Outfits | Streetwear & Style</title>
+
+    <link rel="icon" href="capt_web/caviar_icon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <style>
+        /* HERO */
+        #hero {position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+        #hero-video {position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;}
+        @container (max-width:768px) {#hero{min-height:80vh;}}
+        @container (max-width:480px) {#hero{min-height:70vh;}}
+
+        /* TICKER */
+        #ticker{background:#000;border-top:2px solid #ff4d4d;border-bottom:2px solid #ff4d4d;overflow:hidden;white-space:nowrap;padding:.5rem 0;z-index:1000;}
+        .ticker-wrapper{display:inline-block;padding-left:100%;animation:ticker-scroll 60s linear infinite;}
+        .ticker-content{display:flex;gap:3rem;font-weight:bold;text-transform:uppercase;color:#ff4d4d;font-size:1rem;letter-spacing:1px;}
+        .ticker-content span{padding:0 1rem;}
+        @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+
+        /* ROJO FORZADO */
+        .forced-red-border{border:3px solid #ff4d4d !important;border-radius:.375rem !important;box-shadow:0 .5rem 1rem rgba(255,77,77,.15)!important;}
+        .forced-red-border .form-control,
+        .forced-red-border .form-control:focus{border-color:#ff4d4d !important;box-shadow:0 0 0 .25rem rgba(255,77,77,.25)!important;}
+
+        /* FLECHAS: solo en hover, centradas */
+        .slider-btn {
+            opacity: 0;
+            transition: opacity .3s ease;
+            background: rgba(255,77,77,.7);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            z-index: 10;
+        }
+        .slider-container:hover .slider-btn {opacity: 1;}
+        .carousel .slider-btn {font-size: 2.5rem; width: 60px; height: 60px;}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="sr-only sr-only-focusable bg-danger text-white p-2">Saltar al contenido</a>
+
+<header class="bg-black text-white sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <div class="container-fluid position-relative px-3">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="#hero" class="position-absolute top-50 start-50 translate-middle z-3">
+                <img src="capt_web/caviarlogo.png" alt="Logo Caviar Outfits" class="img-fluid logo-center" loading="lazy">
+            </a>
+            <ul class="navbar-nav ms-auto d-flex flex-row gap-3">
+                <li class="nav-item"><a class="nav-link text-white" href="#idioma" aria-label="Idioma"><span class="d-none d-sm-inline">ESP</span><img src="capt_web/caviar_peque.jpg" class="d-sm-none rounded-circle" style="width:28px;height:28px;" alt="Bandera"></a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#carrito" aria-label="Carrito"><i class="bi bi-bag"></i></a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#busqueda" aria-label="Búsqueda"><i class="bi bi-search"></i></a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#locker" aria-label="Cuenta"><i class="bi bi-person"></i></a></li>
+                <li class="nav-item" id="darkModeToggle"><a class="nav-link text-white" href="#" aria-label="Modo oscuro"><i class="bi bi-moon-stars-fill"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="collapse navbar-collapse" id="navbarMenu" style="z-index:1050;">
+        <div class="bg-black p-4 border-top border-danger border-4" style="max-height:70vh;overflow-y:auto;">
+            <h5 class="text-white h4 mb-3">CAVIAR CATEGORÍAS</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#novedades"><i class="bi bi-star-fill me-2"></i>Novedades</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#ofertas"><i class="bi bi-tag-fill me-2"></i>Ofertas</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#ropa"><i class="fa-solid fa-shirt me-2"></i>Ropa</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#accesorios"><i class="bi bi-gem me-2"></i>Accesorios</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#zapatos"><i class="fa-solid fa-shoe-prints me-2"></i>Zapatos</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#create-outfit"><i class="bi bi-palette-fill me-2"></i>Crea tu Outfit</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#catch-the-swag"><i class="bi bi-lightning-charge-fill me-2"></i>Catch the swag</a></li>
+                <li class="nav-item mb-3"><a class="nav-link text-white" href="#contacto"><i class="bi bi-envelope-fill me-2"></i>Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div id="ticker">
+    <div class="ticker-wrapper">
+        <div class="ticker-content">
+            <span>REGÍSTRATE PARA VER TODAS NUESTRAS NOVEDADES</span>
+            <span>REGÍSTRATE PARA VER TODAS NUESTRAS NOVEDADES</span>
+            <span>REGÍSTRATE PARA VER TODAS NUESTRAS NOVEDADES</span>
+            <span>REGÍSTRATE PARA VER TODAS NUESTRAS NOVEDADES</span>
+            <span>REGÍSTRATE PARA VER TODAS NUESTRAS NOVEDADES</span>
+        </div>
+    </div>
+</div>
+
+<main id="main-content">
+
+<section id="hero" class="position-relative text-center text-white">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto" aria-describedby="hero-desc">
+        <source src="capt_web/CaviarBanner.mp4" type="video/mp4">
+        Tu navegador no soporta video.
+    </video>
+    <div class="hero-text position-absolute top-50 start-50 translate-middle w-100 px-3">
+      <h1 class="text-white mb-4" style="font-family: 'Times New Roman', Times, serif !important; font-weight: bold; line-height: 1.2;">
+        It's not about brand, it's about style
+      </h1>
+      <a href="#registro" class="btn btn-dark btn-lg px-4">Regístrate</a>
+    </div>
+</section>
+
+<!-- CARRUSEL: FLECHAS CENTRADAS -->
+<section id="carousel" class="carousel slide slider-container" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-label="1"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="2"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active"><img src="capt_web/disobey.jpg" class="d-block w-100 carousel-img" alt="Disobey"></div>
+        <div class="carousel-item"><img src="capt_web/carhartt.jpg" class="d-block w-100 carousel-img" alt="Carhartt"></div>
+        <div class="carousel-item"><img src="capt_web/DICKIES.jpg" class="d-block w-100 carousel-img" alt="Dickies"></div>
+    </div>
+    <button class="slider-btn prev position-absolute top-50 start-0 translate-middle-y" data-bs-target="#carousel" data-bs-slide="prev" aria-label="Anterior"><i class="bi bi-arrow-left-circle"></i></button>
+    <button class="slider-btn next position-absolute top-50 end-0 translate-middle-y" data-bs-target="#carousel" data-bs-slide="next" aria-label="Siguiente"><i class="bi bi-arrow-right-circle"></i></button>
+</section>
+
+<div style="height:80px;"></div>
+
+<!-- BUSCADOR Y CATEGORÍAS -->
+<section id="categorias-buscador" class="pb-3 bg-white">
+    <div class="d-flex align-items-center overflow-auto" style="padding: 0 15px; gap: 0;">
+        <div class="buscador-flex me-0">
+            <div class="input-group buscador-rojo">
+                <span class="input-group-text bg-white border-end-0 text-danger">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" placeholder="Buscar productos..." aria-label="Buscar">
+            </div>
+        </div>
+        <div class="categorias-inline ms-2">
+            <a href="#novedades" class="text-dark text-decoration-none fw-bold categoria-link">Novedades</a>
+            <a href="#ofertas" class="text-dark text-decoration-none fw-bold categoria-link">Ofertas</a>
+            <a href="#ropa" class="text-dark text-decoration-none fw-bold categoria-link">Ropa</a>
+            <a href="#colecciones" class="text-dark text-decoration-none fw-bold categoria-link">Colecciones</a>
+            <a href="#catchtheswag" class="text-dark text-decoration-none fw-bold categoria-link">Catch the Swag</a>
+            <a href="#lookbook" class="text-dark text-decoration-none fw-bold categoria-link">Lookbook</a>
+            <a href="#caviarspolaroid" class="text-dark text-decoration-none fw-bold categoria-link">POLAROIDS</a>
+            <a href="#contacto" class="text-dark text-decoration-none fw-bold categoria-link">Contacto</a>
+        </div>
+    </div>
+</section>
+
+<!-- MARCAS -->
+<section id="BRANDS" class="py-5">
+    <h2 class="text-center fw-bold mb-4">BRANDS</h2>
+    <div class="marcas-slider-container position-relative">
+        <button class="slider-btn prev" aria-label="Anterior" onclick="scrollSlider('marcas-slider', -300)">
+            <i class="bi bi-arrow-left-circle"></i>
+        </button>
+        <div class="polaroid-slider d-flex overflow-auto gap-4 p-4" id="marcas-slider">
+            <!-- GRMY -->
+            <div class="marca-item">
+                <img src="capt_web/ynestrosa.jpg" alt="GRMY" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_GRMY.jpg" alt="GRMY Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#grmy">GRMY</a>
+                </div>
+            </div>
+            <!-- DICKIES -->
+            <div class="marca-item">
+                <img src="capt_web/dickiesskate.jpg" alt="DICKIES" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_dickies.png" alt="DICKIES Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#dickies">DICKIES</a>
+                </div>
+            </div>
+            <!-- ADIDAS -->
+            <div class="marca-item">
+                <img src="capt_web/lamineyamal.jpg" alt="ADIDAS" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_adidas.png" alt="ADIDAS Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#adidas">ADIDAS</a>
+                </div>
+            </div>
+            <!-- CARHARTT -->
+            <div class="marca-item">
+                <img src="capt_web/carharttneg.jpg" alt="CARHARTT" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_carhartt.png" alt="CARHARTT Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#carhartt">CARHARTT</a>
+                </div>
+            </div>
+            <!-- OBEY -->
+            <div class="marca-item">
+                <img src="capt_web/obeygorra.jpg" alt="OBEY" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_obey.png" alt="OBEY Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#obey">OBEY</a>
+                </div>
+            </div>
+            <!-- KAPPA -->
+            <div class="marca-item">
+                <img src="capt_web/kappacnai.jpg" alt="KAPPA" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_kappa.png" alt="KAPPA Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#kappa">KAPPA</a>
+                </div>
+            </div>
+            <!-- PUMA -->
+            <div class="marca-item">
+                <img src="capt_web/neymarpuma.jpg" alt="PUMA" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_puma.png" alt="PUMA Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#puma">PUMA</a>
+                </div>
+            </div>
+            <!-- CHAMPION -->
+            <div class="marca-item">
+                <img src="capt_web/championbasket.png" alt="CHAMPION" class="w-100 h-100" style="object-fit: contain;" loading="lazy">
+                <div class="marca-overlay">
+                    <img src="capt_web/logo_champion.png" alt="CHAMPION Logo" class="marca-logo" loading="lazy">
+                </div>
+                <div class="marca-name">
+                    <a href="#champion">CHAMPION</a>
+                </div>
+            </div>
+        </div>
+        <button class="slider-btn next" aria-label="Siguiente" onclick="scrollSlider('marcas-slider', 300)">
+            <i class="bi bi-arrow-right-circle"></i>
+        </button>
+    </div>
+</section>
+
+<!-- POLAROID -->
+<section id="caviarspolaroid" class="py-5 slider-container" style="background:url('capt_web/corcho.jpg') center/cover no-repeat;">
+    <h2 class="text-center fw-bold mb-4 text-white text-shadow">CAVIAR'S POLAROID</h2>
+    <div class="position-relative">
+        <button class="slider-btn prev position-absolute top-50 start-0 translate-middle-y" onclick="scrollSlider('polaroid-slider', -300)" aria-label="Anterior"><i class="bi bi-arrow-left-circle"></i></button>
+        <div class="polaroid-slider d-flex overflow-auto gap-4 p-4" id="polaroid-slider">
+            <img src="capt_web/polaroid1.png" class="polaroid-img" alt="Polaroid 1" loading="lazy">
+            <img src="capt_web/polaroid9.png" class="polaroid-img" alt="Polaroid 9" loading="lazy">
+            <img src="capt_web/polaroid3.png" class="polaroid-img" alt="Polaroid 3" loading="lazy">
+            <img src="capt_web/polaroid4.png" class="polaroid-img" alt="Polaroid 4" loading="lazy">
+            <img src="capt_web/polaroid5.png" class="polaroid-img" alt="Polaroid 5" loading="lazy">
+            <img src="capt_web/polaroid6.png" class="polaroid-img" alt="Polaroid 6" loading="lazy">
+            <img src="capt_web/polaroid7.png" class="polaroid-img" alt="Polaroid 7" loading="lazy">
+            <img src="capt_web/polaroid8.png" class="polaroid-img" alt="Polaroid 8" loading="lazy">
+            <img src="capt_web/polaroid2.png" class="polaroid-img" alt="Polaroid 2" loading="lazy">
+        </div>
+        <button class="slider-btn next position-absolute top-50 end-0 translate-middle-y" onclick="scrollSlider('polaroid-slider', 300)" aria-label="Siguiente"><i class="bi bi-arrow-right-circle"></i></button>
+    </div>
+</section>
+
+<!-- JUEGO FUNCIONANDO -->
+<section id="caviar-game" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-3">CATCH THE SWAG</h2>
+        <p class="text-center mb-4">¡Atrapa las prendas especiales!</p>
+        <div id="gameContainer" 
+             class="position-relative mx-auto border border-danger rounded shadow-lg overflow-hidden" 
+             style="max-width:800px;height:600px;border-width:3px!important;"
+             role="application"
+             aria-label="Juego interactivo: Catch the Swag. Mueve la cesta con ratón o dedo para atrapar las fotos especiales.">
+            <div id="gameInner"></div>
+            <div id="basket" 
+                 class="position-absolute" 
+                 style="bottom:20px;left:50%;transform:translateX(-50%);width:80px;height:80px;font-size:60px;text-align:center;line-height:80px;color:#ff4d4d;"
+                 aria-live="polite"
+                 aria-label="Cesta para atrapar fotos">
+                C
+            </div>
+            <button id="pauseButton" 
+                    class="btn btn-outline-danger position-absolute bottom-0 end-0 m-3 px-4 py-2 fw-bold" 
+                    style="display:none;"
+                    aria-label="Pausar o reanudar el juego">
+                PAUSA
+            </button>
+            <div id="specialPhotoDisplay" 
+                 class="position-absolute top-50 start-50 translate-middle bg-white rounded shadow-lg d-none flex-column align-items-center justify-content-center p-4" 
+                 style="width:280px;height:280px;z-index:50;"
+                 role="alert"
+                 aria-live="assertive">
+                <img id="specialPhotoImg" src="" alt="Foto especial a atrapar" class="rounded border border-dark mb-3" style="width:220px;height:220px;object-fit:cover;">
+                <div class="fw-bold text-center">¡Atrapa esta foto!</div>
+            </div>
+            <div id="prizeNotification" 
+                 class="position-absolute top-50 start-50 translate-middle bg-dark text-warning rounded p-5 text-center fw-bold d-none" 
+                 style="z-index:200;font-size:2rem;border:4px solid #ffcc00;"
+                 role="alert"
+                 aria-live="assertive">
+                ¡PREMIO!<br>¡Has atrapado la Polaroid especial 5 veces!
+            </div>
+            <div id="gamePausedOverlay" 
+                 class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-75 text-white fs-1 fw-bold" 
+                 style="display:none;z-index:100;"
+                 role="alert"
+                 aria-live="assertive">
+                PAUSADO
+            </div>
+        </div>
+    </div>
+</section>
+<!-- CONTACTO + MAPA -->
+<section id="contacto" class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-3">CONTACTO</h2>
+        <p class="text-center mb-4">Deja el ghosting, ¡mándanos un mensaje!</p>
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <form id="contactForm" class="p-4 bg-light text-dark rounded shadow-sm forced-red-border" novalidate>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required>
+                        <div class="invalid-feedback">Obligatorio</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label fw-bold">Correo</label>
+                        <input type="email" class="form-control" id="correo" required>
+                        <div class="invalid-feedback">Correo inválido</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label fw-bold">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+                        <div class="invalid-feedback">Obligatorio</div>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Enviar</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2982.942188629006!2d0.6257737999999999!3d41.61376179999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a6e1e3b3bcaba3%3A0x221341c4958de0d4!2sCaviar%20Outfits!5e0!3m2!1ses!2ses!4v1761653097619!5m2!1ses!2ses" 
+                    width="100%" height="450" style="border:0;border-radius:12px;" 
+                    allowfullscreen="" loading="lazy" 
+                    title="Ubicación de Caviar Outfits">
+                </iframe>
+            </div>
+        </div>
+        <div class="enlaces-sociales d-flex justify-content-center gap-4 mt-3">
+            <a href="https://www.instagram.com/caviaroutfits/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.tiktok.com/@caviar.outfits" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://youtu.be/aCx7NarPp0w" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- REGISTRO -->
+<section id="registro" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-3">REGISTRO</h2>
+        <p class="text-center mb-4">¡Tu drip merece este drop! ¡Regístrate gratis!</p>
+        <form id="registerForm" class="p-4 bg-light text-dark rounded shadow-sm forced-red-border col-md-6 mx-auto" novalidate>
+            <div class="mb-3">
+                <label for="nombre-registro" class="form-label fw-bold">Nombre</label>
+                <input type="text" class="form-control" id="nombre-registro" required>
+                <div class="invalid-feedback">Obligatorio</div>
+            </div>
+            <div class="mb-3">
+                <label for="correo-registro" class="form-label fw-bold">Correo</label>
+                <input type="email" class="form-control" id="correo-registro" required>
+                <div class="invalid-feedback">Correo inválido</div>
+            </div>
+            <button type="submit" class="btn btn-dark w-100">Regístrate</button>
+        </form>
+    </div>
+</section>
+
+</main>
+
+<footer class="bg-black text-white py-4">
+    <div class="container text-center">
+        <p class="mb-1">© 2025 Prácticas Web Dinámica Inc. Todos los derechos reservados.</p>
+        <p class="mb-2">Made with style by Anna Violeta & Raluca</p>
+        <div class="enlaces-legales">
+            <a href="condiciones.html" class="text-white text-decoration-none">Términos</a> |
+            <a href="cookies.html" class="text-white text-decoration-none">Cookies</a> |
+            <a href="privacidad.html" class="text-white text-decoration-none">Privacidad</a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+</html>
